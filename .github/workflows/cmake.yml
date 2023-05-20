@@ -1,4 +1,4 @@
-name: CMake
+name: Build
 
 on:
   push:
@@ -32,10 +32,13 @@ jobs:
       # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       
-    #- name: configure
-    #  run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-Werror" ..
-    #- name: make
-    #  run: cd build && make
-    #- name: Run Test
-    #  run: /home/runner/work/github_actions_gtest_example/github_actions_gtest_example/build/test/github_actions_gtest_example.test      
+    - name: Run Test
+      run: /home/runner/work/github_actions_gtest_example/github_actions_gtest_example/build/BPlusTreeTest      
+
+      #    Upload Artifact
+    - name: Upload production-ready build files
+      uses: actions/upload-artifact@v3
+      with:
+         name: build
+         path: ${{github.workspace}}/build
 
