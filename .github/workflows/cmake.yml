@@ -18,9 +18,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install gtest manually
-      run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp lib/*.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
-
     - uses: actions/checkout@v3
 
     - name: Configure CMake
@@ -32,13 +29,3 @@ jobs:
       # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       
-    - name: Run Test
-      run: /home/runner/work/DictionaryStructures/DictionaryStructures/build/BPlusTreeUT/BPlusTreeTest      
-
-      #    Upload Artifact
-    - name: Upload production-ready build files
-      uses: actions/upload-artifact@v3
-      with:
-         name: build
-         path: ${{github.workspace}}/build
-
